@@ -1,13 +1,13 @@
 from hashlib import md5
 
 
-def main():
+def main() -> None:
     key: str = "bgvyzdsv"
     findHex(key, 5)
     findHex(key, 6)
 
 
-def findHex(key: str, length: int):
+def findHex(key: str, length: int) -> int:
     number: int = 0
     while True:
         hash_result = md5(str.encode(key + str(number)))
@@ -18,6 +18,7 @@ def findHex(key: str, length: int):
             break
 
         number += 1
+    return number
 
 
 if __name__ == "__main__":

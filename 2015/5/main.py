@@ -7,7 +7,7 @@ naughty_strings: {str} = {
 }
 
 
-def main():
+def main() -> None:
     with open("input.txt", "r") as file:
         nice_strings: int = 0
         better_nice_strings: int = 0
@@ -21,7 +21,7 @@ def main():
         print("better nice string count: {}".format(better_nice_strings))
 
 
-def isPartOneNice(string: str):
+def isPartOneNice(string: str) -> bool:
     prev_char: str = ''
     vowel_count: int = 0
     has_double: bool = False
@@ -41,7 +41,7 @@ def isPartOneNice(string: str):
     return False
 
 
-def isBetterNice(string: str):
+def isBetterNice(string: str) -> bool:
     all_pairs: {(str, str): int} = {}
     char_two_behind: str = ''
     char_one_behind: str = ''

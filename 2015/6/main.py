@@ -7,7 +7,7 @@ class Instruction(Enum):
     TOGGLE = 3
 
 
-def main():
+def main() -> None:
     wrong_grid: [[bool]] = [[False for _ in range(0, 1000)] for _ in range(0, 1000)]
     elvish_grid: [[int]] = [[0 for _ in range(0, 1000)] for _ in range(0, 1000)]
 
@@ -32,7 +32,7 @@ def main():
             wrong_lit_count, correct_elvish_count))
 
 
-def getCoordinates(split_string: [str]):
+def getCoordinates(split_string: [str]) -> (int, int, int, int):
     x_start: int = 0
     y_start: int = 0
     x_end: int = 0
@@ -48,7 +48,7 @@ def getCoordinates(split_string: [str]):
     return x_start, y_start, x_end, y_end
 
 
-def performWrongInstruction(instruction: Instruction, grid: [[bool]], x: int, y: int):
+def performWrongInstruction(instruction: Instruction, grid: [[bool]], x: int, y: int) -> None:
     match instruction:
         case Instruction.ON:
             grid[x][y] = True
@@ -58,7 +58,7 @@ def performWrongInstruction(instruction: Instruction, grid: [[bool]], x: int, y:
             grid[x][y] = not grid[x][y]
 
 
-def performElvishInstruction(instruction: Instruction, grid: [[int]], x: int, y: int):
+def performElvishInstruction(instruction: Instruction, grid: [[int]], x: int, y: int) -> None:
     match instruction:
         case Instruction.ON:
             grid[x][y] += 1
@@ -68,7 +68,7 @@ def performElvishInstruction(instruction: Instruction, grid: [[int]], x: int, y:
             grid[x][y] += 2
 
 
-def getInstruction(instruction: str):
+def getInstruction(instruction: str) -> Instruction:
     match instruction:
         case "on":
             return Instruction.ON

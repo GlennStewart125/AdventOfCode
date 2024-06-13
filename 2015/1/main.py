@@ -1,4 +1,4 @@
-def main():
+def main() -> None:
     with open("input.txt", "r") as file:
         floor: int = 0
         position: int = 1

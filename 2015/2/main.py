@@ -1,7 +1,7 @@
 from functools import reduce
 
 
-def main():
+def main() -> None:
     with open("input.txt", "r") as file:
         total_area: int = 0
         total_ribbon: int = 0

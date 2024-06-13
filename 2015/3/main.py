@@ -16,14 +16,14 @@ class Santa:
                 self.x -= 1
 
 
-def main():
+def main() -> None:
     with open("input.txt", "r") as file:
         onlySanta(file)
         file.seek(0)
         doubleTrouble(file)
 
 
-def onlySanta(file: [str]):
+def onlySanta(file: [str]) -> None:
     santa: Santa = Santa(0, 0)
     while True:
         direction: str = file.read(1)
@@ -37,7 +37,7 @@ def onlySanta(file: [str]):
     print("only santa: {}".format((len(santa.visited))))
 
 
-def doubleTrouble(file: [str]):
+def doubleTrouble(file: [str]) -> None:
     real_santa: Santa = Santa(0, 0)
     robot_santa: Santa = Santa(0, 0)
     move_real_santa: bool = True

@@ -1,0 +1,72 @@
+import sys
+import operator
+
+cities: {str: {str: int}} = {}
+
+
+def main() -> None:
+    readCities()
+
+    best_path: str
+    best_dist: int
+
+    best_path, best_dist = getRoute(operator.lt)
+    print(best_path + str(best_dist))
+    best_path, best_dist = getRoute(operator.gt)
+    print(best_path + str(best_dist))
+
+
+def readCities() -> None:
+    with open("input.txt", "r") as file:
+        for line in file:
+            str_split: [str] = line.split(' ')
+            if str_split[2] not in cities:
+                cities[str_split[2]] = {str_split[0]: int(str_split[4])}
+            else:
+                cities[str_split[2]][str_split[0]] = int(str_split[4])
+            if str_split[0] not in cities:
+                cities[str_split[0]] = {str_split[2]: int(str_split[4])}
+            else:
+                cities[str_split[0]][str_split[2]] = int(str_split[4])
+
+
+def getRoute(op: operator) -> tuple[str, int]:
+    best_route: str = ""
+    best_distance: int = sys.maxsize if op == operator.lt else 0
+
+    for city in cities.keys():
+        route, distance = calculateRoute(city, set(), "", op)
+        if op(distance, best_distance):
+            best_route = route
+            best_distance = distance
+
+    return best_route, best_distance
+
+
+def calculateRoute(name: str, visited: set[str], path: str, op: operator) -> tuple[str, int]:
+    last_city: bool = True
+    path += "{} ".format(name)
+    visited.add(name)
+
+    min_distance: int = sys.maxsize if op == operator.lt else 0
+    min_path: str = ""
+
+    for connected_city_name, distance in cities[name].items():
+        if connected_city_name in visited:
+            continue
+
+        last_city = False
+        path, recursion_distance = calculateRoute(connected_city_name, visited.copy(), path, op)
+        if op(distance + recursion_distance, min_distance):
+            min_distance = distance + recursion_distance
+            min_path = path
+            path = "{} ".format(name)
+
+    if last_city:
+        return path, 0
+    else:
+        return min_path, min_distance
+
+
+if __name__ == "__main__":
+    main()

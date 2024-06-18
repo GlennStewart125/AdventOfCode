@@ -1,10 +1,10 @@
 class Santa:
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         self.x: int = x
         self.y: int = y
         self.visited: {[int, int]} = {(0, 0)}
 
-    def move(self, direction: str):
+    def move(self, direction: str) -> None:
         match direction:
             case '^':
                 self.y += 1

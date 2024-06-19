@@ -3,7 +3,7 @@ from typing import TextIO
 
 class Reindeer:
 
-    def __init__(self, name: str, speed: int, flight_time: int, rest_time: int) -> None:
+    def __init__(self, speed: int, flight_time: int, rest_time: int) -> None:
         self.is_flying = True
         self.speed = speed
         self.flight_time = flight_time
@@ -39,15 +39,14 @@ def main() -> None:
         line: str
         for line in file:
             line_split: [str] = line.split(' ')
-            reindeer.add(Reindeer(line_split[0], int(line_split[3]), int(line_split[6]),
-                                  int(line_split[-2])))
+            reindeer.add(Reindeer(int(line_split[3]), int(line_split[6]), int(line_split[-2])))
 
     second: int
     rd: Reindeer
     for second in range(seconds):
         for rd in reindeer:
             rd.fly()
-        award_reindeer: [Reindeer] = [ x for x in reindeer if x == max(reindeer, key=lambda y: y.distance_traveled)]
+        award_reindeer: [Reindeer] = [x for x in reindeer if x == max(reindeer, key=lambda y: y.distance_traveled)]
         for rd in award_reindeer:
             rd.points += 1
 

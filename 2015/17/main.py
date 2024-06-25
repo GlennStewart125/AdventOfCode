@@ -6,7 +6,7 @@ def main() -> None:
     containers: [int] = []
 
     with open("input.txt", "r") as file:
-        line: str
+        container: str
         for container in file:
             containers.append(int(container))
 

@@ -1,5 +1,6 @@
 import sys
 import operator
+from typing import TextIO
 
 cities: {str: {str: int}} = {}
 
@@ -17,7 +18,9 @@ def main() -> None:
 
 
 def readCities() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
+        line: str
         for line in file:
             str_split: [str] = line.split(' ')
             if str_split[2] not in cities:
@@ -32,9 +35,13 @@ def readCities() -> None:
 
 def getRoute(op: operator) -> tuple[str, int]:
     best_route: str = ""
+    city: str
     best_distance: int = sys.maxsize if op == operator.lt else 0
 
     for city in cities.keys():
+        route: str
+        distance: int
+
         route, distance = calculateRoute(city, set(), "", op)
         if op(distance, best_distance):
             best_route = route
@@ -44,18 +51,21 @@ def getRoute(op: operator) -> tuple[str, int]:
 
 
 def calculateRoute(name: str, visited: set[str], path: str, op: operator) -> tuple[str, int]:
+    connected_city_name: str
+    distance: int
+    min_path: str = ""
     last_city: bool = True
     path += "{} ".format(name)
     visited.add(name)
-
     min_distance: int = sys.maxsize if op == operator.lt else 0
-    min_path: str = ""
 
     for connected_city_name, distance in cities[name].items():
         if connected_city_name in visited:
             continue
-
         last_city = False
+        path: str
+        recursion_distance: int
+
         path, recursion_distance = calculateRoute(connected_city_name, visited.copy(), path, op)
         if op(distance + recursion_distance, min_distance):
             min_distance = distance + recursion_distance
@@ -68,5 +78,4 @@ def calculateRoute(name: str, visited: set[str], path: str, op: operator) -> tup
         return min_path, min_distance
 
 
-if __name__ == "__main__":
-    main()
+main()

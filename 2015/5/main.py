@@ -1,3 +1,5 @@
+from typing import TextIO
+
 vowels: {str} = {'a', 'e', 'i', 'o', 'u'}
 naughty_strings: {str} = {
     'ab',
@@ -8,9 +10,12 @@ naughty_strings: {str} = {
 
 
 def main() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
         nice_strings: int = 0
         better_nice_strings: int = 0
+        string: str
+
         for string in file:
             if isPartOneNice(string):
                 nice_strings += 1
@@ -26,6 +31,7 @@ def isPartOneNice(string: str) -> bool:
     vowel_count: int = 0
     has_double: bool = False
 
+    char: str
     for char in string:
         if char in vowels:
             vowel_count += 1
@@ -48,6 +54,8 @@ def isBetterNice(string: str) -> bool:
     has_repeat_with_space: bool = False
     has_pair: bool = False
 
+    index: int
+    char: str
     for index, char in enumerate(string):
         if char_one_behind == '':
             char_one_behind = char
@@ -70,5 +78,4 @@ def isBetterNice(string: str) -> bool:
     return False
 
 
-if __name__ == "__main__":
-    main()
+main()

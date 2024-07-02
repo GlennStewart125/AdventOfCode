@@ -1,7 +1,11 @@
+from typing import TextIO
+
+
 def main() -> None:
     steps: int = 100
     state: [[bool]] = []
     with_corners: bool = True
+    file: TextIO
 
     with open("input.txt", "r") as file:
         file_row: str
@@ -24,7 +28,7 @@ def main() -> None:
     print(str(on_count))
 
 
-def performStep(state_current: [[bool]], with_corners:  bool) -> [[bool]]:
+def performStep(state_current: [[bool]], with_corners: bool) -> [[bool]]:
     state_new: [[bool]] = []
     y: int
     row: [bool]
@@ -74,5 +78,4 @@ def getNewLightValue(state: [[bool]], x: int, y: int, light_bool: bool) -> bool:
         return False
 
 
-if __name__ == "__main__":
-    main()
+main()

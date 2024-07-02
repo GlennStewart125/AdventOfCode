@@ -1,4 +1,8 @@
+from typing import TextIO
+
+
 def main() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
         floor: int = 0
         position: int = 1
@@ -21,5 +25,4 @@ def main() -> None:
             position += 1
 
 
-if __name__ == "__main__":
-    main()
+main()

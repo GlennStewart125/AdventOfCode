@@ -1,18 +1,24 @@
+from typing import TextIO
+
 calc: {str: [str]} = {}
 signals: {str: int} = {}
 
 
 def main() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
+        line: str
         for line in file:
             (operation, wire_id) = line.split('->')
             calc[wire_id.strip()] = operation.strip().split()
 
+    wire: str
     for wire in calc.keys():
         calculateSignal(wire)
 
     result_a: int = signals['a']
     print("a: {}".format(result_a))
+
     signals.clear()
     signals['b'] = result_a
     for wire in calc.keys():
@@ -47,5 +53,4 @@ def calculateSignal(wire: str) -> int:
     return signals[wire]
 
 
-if __name__ == "__main__":
-    main()
+main()

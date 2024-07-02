@@ -1,3 +1,6 @@
+from typing import TextIO
+
+
 class Santa:
     def __init__(self, x: int, y: int) -> None:
         self.x: int = x
@@ -17,13 +20,14 @@ class Santa:
 
 
 def main() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
         onlySanta(file)
         file.seek(0)
         doubleTrouble(file)
 
 
-def onlySanta(file: [str]) -> None:
+def onlySanta(file: TextIO) -> None:
     santa: Santa = Santa(0, 0)
     while True:
         direction: str = file.read(1)
@@ -37,7 +41,7 @@ def onlySanta(file: [str]) -> None:
     print("only santa: {}".format((len(santa.visited))))
 
 
-def doubleTrouble(file: [str]) -> None:
+def doubleTrouble(file: TextIO) -> None:
     real_santa: Santa = Santa(0, 0)
     robot_santa: Santa = Santa(0, 0)
     move_real_santa: bool = True
@@ -57,5 +61,4 @@ def doubleTrouble(file: [str]) -> None:
     print("santa + robot: {}".format(len(real_santa.visited | robot_santa.visited)))
 
 
-if __name__ == "__main__":
-    main()
+main()

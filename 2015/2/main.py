@@ -1,14 +1,18 @@
 from functools import reduce
+from typing import TextIO
 
 
 def main() -> None:
+    file: TextIO
     with open("input.txt", "r") as file:
         total_area: int = 0
         total_ribbon: int = 0
         lines: [str] = file.readlines()
+        present: str
 
         for present in lines:
-            dimensions = [int(x) for x in present.split('x')]
+            dim: str
+            dimensions: [int] = [int(dim) for dim in present.split('x')]
             side1: int = dimensions[0] * dimensions[1]
             side2: int = dimensions[1] * dimensions[2]
             side3: int = dimensions[2] * dimensions[0]
@@ -24,5 +28,4 @@ def main() -> None:
         print("ribbon: {}".format(total_ribbon))
 
 
-if __name__ == "__main__":
-    main()
+main()

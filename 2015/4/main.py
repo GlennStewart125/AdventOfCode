@@ -1,3 +1,4 @@
+from __future__ import annotations
 from hashlib import md5
 
 
@@ -21,5 +22,4 @@ def findHex(key: str, length: int) -> int:
     return number
 
 
-if __name__ == "__main__":
-    main()
+main()

@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import TextIO
 
 
 class Instruction(Enum):
@@ -11,6 +12,7 @@ def main() -> None:
     wrong_grid: [[bool]] = [[False for _ in range(0, 1000)] for _ in range(0, 1000)]
     elvish_grid: [[int]] = [[0 for _ in range(0, 1000)] for _ in range(0, 1000)]
 
+    file: TextIO
     with open("input.txt", "r") as file:
         for line in file:
             x_start: int
@@ -21,13 +23,16 @@ def main() -> None:
             instruction: Instruction = getInstruction(split_string[1])
             x_start, y_start, x_end, y_end = getCoordinates(split_string)
 
-            for x in range(x_start, x_end + 1):
-                for y in range(y_start, y_end + 1):
-                    performWrongInstruction(instruction, wrong_grid, x, y)
-                    performElvishInstruction(instruction, elvish_grid, x, y)
+            x_pos: int
+            y_pos: int
+            for x_pos in range(x_start, x_end + 1):
+                for y_pos in range(y_start, y_end + 1):
+                    performWrongInstruction(instruction, wrong_grid, x_pos, y_pos)
+                    performElvishInstruction(instruction, elvish_grid, x_pos, y_pos)
 
-        wrong_lit_count: int = sum([sum(x) for x in wrong_grid])
-        correct_elvish_count: int = sum([sum(x) for x in elvish_grid])
+        bool_list: [bool]
+        wrong_lit_count: int = sum([sum(bool_list) for bool_list in wrong_grid])
+        correct_elvish_count: int = sum([sum(bool_list) for bool_list in elvish_grid])
         print("wrong count: {}, correct elvish count: {}".format(
             wrong_lit_count, correct_elvish_count))
 
@@ -78,5 +83,4 @@ def getInstruction(instruction: str) -> Instruction:
             return Instruction.TOGGLE
 
 
-if __name__ == "__main__":
-    main()
+main()

@@ -4,6 +4,7 @@ times: int = 50
 
 def main() -> None:
     result: str = puzzle_input
+
     for _ in range(0, times):
         result = lookAndSay(result)
 
@@ -14,6 +15,7 @@ def lookAndSay(input_string: str) -> str:
     result: str = ""
     previous_char: str = ""
     previous_count: int = 0
+    char: str
 
     for char in input_string:
         if previous_char == "":
@@ -30,5 +32,4 @@ def lookAndSay(input_string: str) -> str:
     return result
 
 
-if __name__ == "__main__":
-    main()
+main()

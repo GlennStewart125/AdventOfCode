@@ -37,7 +37,7 @@ def getValues(file_name: str) -> [int]:
 
 
 def main() -> None:
-    lines: [str] = getValues("input.txt")
+    lines: [int] = getValues("input.txt")
     enemy_hp: int = lines[0]
     enemy_damage: int = lines[1]
     enemy_armor: int = lines[2]

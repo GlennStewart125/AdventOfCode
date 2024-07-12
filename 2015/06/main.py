@@ -3,9 +3,9 @@ from typing import TextIO
 
 
 class Instruction(Enum):
-    ON = 1
-    OFF = 2
-    TOGGLE = 3
+    ON: int = 1
+    OFF: int = 2
+    TOGGLE: int = 3
 
 
 def main() -> None:

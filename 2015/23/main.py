@@ -1,4 +1,4 @@
-def getValues(file_name: str) -> [int]:
+def getValues(file_name: str) -> [[str]]:
     return [(i.strip().split(' ')) for i in open(file_name, 'r')]
 
 

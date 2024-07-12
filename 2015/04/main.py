@@ -1,5 +1,7 @@
 from __future__ import annotations
-from hashlib import md5
+import hashlib
+
+HASH = hashlib._hashlib.HASH
 
 
 def main() -> None:
@@ -11,7 +13,7 @@ def main() -> None:
 def findHex(key: str, length: int) -> int:
     number: int = 0
     while True:
-        hash_result = md5(str.encode(key + str(number)))
+        hash_result: HASH = hashlib.md5(str.encode(key + str(number)))
         hexadecimal_str: str = hash_result.hexdigest()
 
         if hexadecimal_str[:length] == "0" * length:

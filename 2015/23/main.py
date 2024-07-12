@@ -8,7 +8,6 @@ def main() -> None:
 
     index: int = 0
     while index < len(instructs):
-        print(index)
         index_increment: int = 1
         instruction: [str] = instructs[index]
         match instruction[0]:

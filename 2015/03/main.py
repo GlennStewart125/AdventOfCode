@@ -22,12 +22,12 @@ class Santa:
 def main() -> None:
     file: TextIO
     with open("input.txt", "r") as file:
-        onlySanta(file)
+        only_santa(file)
         file.seek(0)
-        doubleTrouble(file)
+        double_trouble(file)
 
 
-def onlySanta(file: TextIO) -> None:
+def only_santa(file: TextIO) -> None:
     santa: Santa = Santa(0, 0)
     while True:
         direction: str = file.read(1)
@@ -41,7 +41,7 @@ def onlySanta(file: TextIO) -> None:
     print("only santa: {}".format((len(santa.visited))))
 
 
-def doubleTrouble(file: TextIO) -> None:
+def double_trouble(file: TextIO) -> None:
     real_santa: Santa = Santa(0, 0)
     robot_santa: Santa = Santa(0, 0)
     move_real_santa: bool = True

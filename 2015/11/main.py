@@ -2,29 +2,29 @@ puzzle_input: str = "vzbxkghb"
 
 
 def main() -> None:
-    new_password = findNewPassword(puzzle_input)
+    new_password = find_new_password(puzzle_input)
     print(new_password)
-    new_password = findNewPassword(new_password)
+    new_password = find_new_password(new_password)
     print(new_password)
 
 
-def findNewPassword(input_str: str) -> str:
+def find_new_password(input_str: str) -> str:
     new_password = increment(input_str)
-    while not isValid(new_password):
+    while not is_valid(new_password):
         new_password = increment(new_password)
 
     return new_password
 
 
-def isValid(password: str) -> bool:
-    no_illegal_char = notContainsChar(password)
-    contains_increasing = containsIncreasing(password)
-    contains_two_pairs = containsPairs(password)
+def is_valid(password: str) -> bool:
+    no_illegal_char = not_contains_char(password)
+    contains_increasing = contains_increasing(password)
+    contains_two_pairs = contains_pairs(password)
 
     return no_illegal_char and contains_increasing and contains_two_pairs
 
 
-def notContainsChar(password: str) -> bool:
+def not_contains_char(password: str) -> bool:
     no_illegal_char: bool = True
     if 'i' in password or 'o' in password or 'l' in password:
         no_illegal_char = False
@@ -32,7 +32,7 @@ def notContainsChar(password: str) -> bool:
     return no_illegal_char
 
 
-def containsIncreasing(password: str) -> bool:
+def contains_increasing(password: str) -> bool:
     contains_increasing: bool = False
     for index in range(0, len(password) - 2):
         currentChar: str = password[index]
@@ -43,7 +43,7 @@ def containsIncreasing(password: str) -> bool:
     return contains_increasing
 
 
-def containsPairs(password: str) -> bool:
+def contains_pairs(password: str) -> bool:
     pairs_count: int = 0
     previous_char: str = ""
     for char in password:

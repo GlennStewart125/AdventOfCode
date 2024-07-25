@@ -20,15 +20,15 @@ def main() -> None:
             x_end: int
             y_end: int
             split_string: [str] = line.split(' ')
-            instruction: Instruction = getInstruction(split_string[1])
-            x_start, y_start, x_end, y_end = getCoordinates(split_string)
+            instruction: Instruction = get_instruction(split_string[1])
+            x_start, y_start, x_end, y_end = get_coordinates(split_string)
 
             x_pos: int
             y_pos: int
             for x_pos in range(x_start, x_end + 1):
                 for y_pos in range(y_start, y_end + 1):
-                    performWrongInstruction(instruction, wrong_grid, x_pos, y_pos)
-                    performElvishInstruction(instruction, elvish_grid, x_pos, y_pos)
+                    perform_wrong_instruction(instruction, wrong_grid, x_pos, y_pos)
+                    perform_elvish_instruction(instruction, elvish_grid, x_pos, y_pos)
 
         bool_list: [bool]
         wrong_lit_count: int = sum([sum(bool_list) for bool_list in wrong_grid])
@@ -37,7 +37,7 @@ def main() -> None:
             wrong_lit_count, correct_elvish_count))
 
 
-def getCoordinates(split_string: [str]) -> (int, int, int, int):
+def get_coordinates(split_string: [str]) -> (int, int, int, int):
     x_start: int = 0
     y_start: int = 0
     x_end: int = 0
@@ -53,7 +53,7 @@ def getCoordinates(split_string: [str]) -> (int, int, int, int):
     return x_start, y_start, x_end, y_end
 
 
-def performWrongInstruction(instruction: Instruction, grid: [[bool]], x: int, y: int) -> None:
+def perform_wrong_instruction(instruction: Instruction, grid: [[bool]], x: int, y: int) -> None:
     match instruction:
         case Instruction.ON:
             grid[x][y] = True
@@ -63,7 +63,7 @@ def performWrongInstruction(instruction: Instruction, grid: [[bool]], x: int, y:
             grid[x][y] = not grid[x][y]
 
 
-def performElvishInstruction(instruction: Instruction, grid: [[int]], x: int, y: int) -> None:
+def perform_elvish_instruction(instruction: Instruction, grid: [[int]], x: int, y: int) -> None:
     match instruction:
         case Instruction.ON:
             grid[x][y] += 1
@@ -73,7 +73,7 @@ def performElvishInstruction(instruction: Instruction, grid: [[int]], x: int, y:
             grid[x][y] += 2
 
 
-def getInstruction(instruction: str) -> Instruction:
+def get_instruction(instruction: str) -> Instruction:
     match instruction:
         case "on":
             return Instruction.ON

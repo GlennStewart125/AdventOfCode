@@ -10,19 +10,19 @@ class Ingredient:
         self.texture = texture
         self.calories = calories
 
-    def getTotalCapacity(self, amount: int) -> int:
+    def get_total_capacity(self, amount: int) -> int:
         return self.capacity * amount
 
-    def getTotalDurability(self, amount: int) -> int:
+    def get_total_durability(self, amount: int) -> int:
         return self.durability * amount
 
-    def getTotalFlavour(self, amount: int) -> int:
+    def get_total_flavour(self, amount: int) -> int:
         return self.flavour * amount
 
-    def getTotalTexture(self, amount: int) -> int:
+    def get_total_texture(self, amount: int) -> int:
         return self.texture * amount
 
-    def getTotalCalories(self, amount: int) -> int:
+    def get_total_calories(self, amount: int) -> int:
         return self.calories * amount
 
 
@@ -39,16 +39,16 @@ def main() -> None:
             ingredients.append(Ingredient(int(split[2][:-1]), int(split[4][:-1]),
                                           int(split[6][:-1]), int(split[8][:-1]), int(split[10])))
 
-    ingredient_permutations: [[int]] = generatePermutations(teaspoons, len(ingredients),
-                                                            0, [], [])
+    ingredient_permutations: [[int]] = generate_permutations(teaspoons, len(ingredients),
+                                                             0, [], [])
 
     best_score: int
     best_score_with_calories: int
-    best_score, best_score_with_calories = calculateScore(ingredient_permutations, ingredients, calories)
+    best_score, best_score_with_calories = calculate_score(ingredient_permutations, ingredients, calories)
     print("without calories: {}, with calories: {}".format(best_score, best_score_with_calories))
 
 
-def calculateScore(ingredient_permutations: [[int]], ingredients: [Ingredient], calories: int) -> (int, int):
+def calculate_score(ingredient_permutations: [[int]], ingredients: [Ingredient], calories: int) -> (int, int):
     best_score: int = 0
     best_score_with_calories = 0
 
@@ -62,11 +62,11 @@ def calculateScore(ingredient_permutations: [[int]], ingredients: [Ingredient], 
         index: int
 
         for index, amount in enumerate(recipe):
-            total_capacity += ingredients[index].getTotalCapacity(amount)
-            total_durability += ingredients[index].getTotalDurability(amount)
-            total_flavour += ingredients[index].getTotalFlavour(amount)
-            total_texture += ingredients[index].getTotalTexture(amount)
-            total_calories += ingredients[index].getTotalCalories(amount)
+            total_capacity += ingredients[index].get_total_capacity(amount)
+            total_durability += ingredients[index].get_total_durability(amount)
+            total_flavour += ingredients[index].get_total_flavour(amount)
+            total_texture += ingredients[index].get_total_texture(amount)
+            total_calories += ingredients[index].get_total_calories(amount)
 
         totalScore: int = (max(0, total_capacity) * max(0, total_durability) *
                            max(0, total_flavour) * max(0, total_texture))
@@ -78,8 +78,8 @@ def calculateScore(ingredient_permutations: [[int]], ingredients: [Ingredient], 
     return best_score, best_score_with_calories
 
 
-def generatePermutations(teaspoons_left: int, ingredients_length: int, current_ingredient: int,
-                         recipe: [int], permutations: [[int]]) -> [[int]]:
+def generate_permutations(teaspoons_left: int, ingredients_length: int, current_ingredient: int,
+                          recipe: [int], permutations: [[int]]) -> [[int]]:
     if current_ingredient >= ingredients_length:
         if teaspoons_left == 0:
             permutations.append(recipe)
@@ -90,8 +90,8 @@ def generatePermutations(teaspoons_left: int, ingredients_length: int, current_i
     for amount in range(0, teaspoons_left + 1):
         new_recipe: [int] = list(recipe)
         new_recipe.append(amount)
-        generatePermutations(teaspoons_left - amount, ingredients_length, current_ingredient + 1, new_recipe,
-                             permutations)
+        generate_permutations(teaspoons_left - amount, ingredients_length, current_ingredient + 1, new_recipe,
+                              permutations)
 
     return permutations
 

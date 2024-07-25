@@ -17,16 +17,16 @@ def main() -> None:
         string: str
 
         for string in file:
-            if isPartOneNice(string):
+            if is_part_one_nice(string):
                 nice_strings += 1
-            if isBetterNice(string):
+            if is_better_nice(string):
                 better_nice_strings += 1
 
         print("nice string count: {}".format(nice_strings))
         print("better nice string count: {}".format(better_nice_strings))
 
 
-def isPartOneNice(string: str) -> bool:
+def is_part_one_nice(string: str) -> bool:
     prev_char: str = ''
     vowel_count: int = 0
     has_double: bool = False
@@ -47,7 +47,7 @@ def isPartOneNice(string: str) -> bool:
     return False
 
 
-def isBetterNice(string: str) -> bool:
+def is_better_nice(string: str) -> bool:
     all_pairs: {(str, str): int} = {}
     char_two_behind: str = ''
     char_one_behind: str = ''

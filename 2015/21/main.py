@@ -32,26 +32,26 @@ rings: [Item] = [Item("Damage +1", 25, 1, 0),
                  ]
 
 
-def getValues(file_name: str) -> [int]:
+def get_values(file_name: str) -> [int]:
     return [int(i.strip().split(' ')[-1]) for i in open(file_name, 'r')]
 
 
 def main() -> None:
-    lines: [int] = getValues("input.txt")
+    lines: [int] = get_values("input.txt")
     enemy_hp: int = lines[0]
     enemy_damage: int = lines[1]
     enemy_armor: int = lines[2]
     cost_victory_min: int = sys.maxsize
     cost_loss_max: int = 0
 
-    combinations: [[Item]] = getOutfitCombinations()
+    combinations: [[Item]] = get_outfit_combinations()
     combination: [Item]
     for combination in combinations:
         player_armor: int
         player_damage: int
         cost: int
 
-        player_damage, player_armor, cost = getOutfitStats(combination)
+        player_damage, player_armor, cost = get_outfit_stats(combination)
         victory: bool = fight(enemy_hp, enemy_damage, enemy_armor, player_damage, player_armor)
 
         if victory and cost < cost_victory_min:
@@ -64,7 +64,7 @@ def main() -> None:
     print(cost_loss_max)
 
 
-def getOutfitCombinations() -> [[Item]]:
+def get_outfit_combinations() -> [[Item]]:
     all_combinations: [[Item]] = [[weapon, armor] for weapon in weapons for armor in armors]
     weapon: Item
     for weapon in weapons:
@@ -80,7 +80,7 @@ def getOutfitCombinations() -> [[Item]]:
     return all_combinations
 
 
-def getOutfitStats(outfit: [[Item]]) -> (int, int, int):
+def get_outfit_stats(outfit: [[Item]]) -> (int, int, int):
     damage: int = 0
     armor: int = 0
     cost: int = 0

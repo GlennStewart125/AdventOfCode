@@ -1,10 +1,10 @@
-def getValues(file_name: str) -> [str]:
+def get_values(file_name: str) -> [str]:
     with open(file_name) as f:
         return f.readline().strip().split(' ')
 
 
 def main() -> None:
-    instruction: [str] = getValues("input.txt")
+    instruction: [str] = get_values("input.txt")
     row_limit: int = int(instruction[-3][:-1])
     column_limit: int = int(instruction[-1][:-1])
     first_code: int = 20151125
@@ -21,7 +21,7 @@ def main() -> None:
             value = first_code
             previous_value = value
         else:
-            value = getCode(previous_value, multiplier, divider)
+            value = get_code(previous_value, multiplier, divider)
             previous_value = value
 
         if row == row_limit and column == column_limit:
@@ -38,7 +38,7 @@ def main() -> None:
     print(value)
 
 
-def getCode(previous_value: int, multiplier: int, divider: int) -> int:
+def get_code(previous_value: int, multiplier: int, divider: int) -> int:
     return int((previous_value * multiplier) % divider)
 
 

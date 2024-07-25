@@ -6,12 +6,12 @@ def main() -> None:
     result: str = puzzle_input
 
     for _ in range(0, times):
-        result = lookAndSay(result)
+        result = look_and_say(result)
 
     print(len(result))
 
 
-def lookAndSay(input_string: str) -> str:
+def look_and_say(input_string: str) -> str:
     result: str = ""
     previous_char: str = ""
     previous_count: int = 0

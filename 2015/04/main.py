@@ -6,11 +6,11 @@ HASH = hashlib._hashlib.HASH
 
 def main() -> None:
     key: str = "bgvyzdsv"
-    findHex(key, 5)
-    findHex(key, 6)
+    find_hex(key, 5)
+    find_hex(key, 6)
 
 
-def findHex(key: str, length: int) -> int:
+def find_hex(key: str, length: int) -> int:
     number: int = 0
     while True:
         hash_result: HASH = hashlib.md5(str.encode(key + str(number)))

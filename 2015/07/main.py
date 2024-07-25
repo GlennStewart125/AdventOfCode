@@ -14,7 +14,7 @@ def main() -> None:
 
     wire: str
     for wire in calc.keys():
-        calculateSignal(wire)
+        calculate_signal(wire)
 
     result_a: int = signals['a']
     print("a: {}".format(result_a))
@@ -22,11 +22,11 @@ def main() -> None:
     signals.clear()
     signals['b'] = result_a
     for wire in calc.keys():
-        calculateSignal(wire)
+        calculate_signal(wire)
     print("a: {}".format(signals['a']))
 
 
-def calculateSignal(wire: str) -> int:
+def calculate_signal(wire: str) -> int:
     try:
         return int(wire)
     except ValueError:
@@ -35,20 +35,20 @@ def calculateSignal(wire: str) -> int:
     inputs: [str] = calc[wire]
     if wire not in signals.keys():
         if len(inputs) == 1:
-            signals[wire] = calculateSignal(inputs[0])
+            signals[wire] = calculate_signal(inputs[0])
         else:
             operation: str = inputs[-2]
             match operation:
                 case "AND":
-                    signals[wire] = calculateSignal(inputs[-1]) & calculateSignal(inputs[-3])
+                    signals[wire] = calculate_signal(inputs[-1]) & calculate_signal(inputs[-3])
                 case "OR":
-                    signals[wire] = calculateSignal(inputs[-1]) | calculateSignal(inputs[-3])
+                    signals[wire] = calculate_signal(inputs[-1]) | calculate_signal(inputs[-3])
                 case "LSHIFT":
-                    signals[wire] = calculateSignal(inputs[-3]) << calculateSignal(inputs[-1])
+                    signals[wire] = calculate_signal(inputs[-3]) << calculate_signal(inputs[-1])
                 case "RSHIFT":
-                    signals[wire] = calculateSignal(inputs[-3]) >> calculateSignal(inputs[-1])
+                    signals[wire] = calculate_signal(inputs[-3]) >> calculate_signal(inputs[-1])
                 case "NOT":
-                    signals[wire] = ~ calculateSignal(inputs[-1]) & 0xffff
+                    signals[wire] = ~ calculate_signal(inputs[-1]) & 0xffff
 
     return signals[wire]
 

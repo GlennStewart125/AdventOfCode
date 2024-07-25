@@ -12,12 +12,12 @@ def main() -> None:
 
     valid_combinations: int
     min_combinations_count: int
-    valid_combinations, min_combinations_count = getResults(containers, eggnog_amount)
+    valid_combinations, min_combinations_count = get_results(containers, eggnog_amount)
     print(valid_combinations)
     print(min_combinations_count)
 
 
-def getResults(containers: [int], eggnog_amount: int) -> (int, int):
+def get_results(containers: [int], eggnog_amount: int) -> (int, int):
     bools: [bool] = [True, False]
 
     combinations: [(int, [bool])] = [(i, list(c)) for i, c in enumerate(product(bools, repeat=len(containers)))]

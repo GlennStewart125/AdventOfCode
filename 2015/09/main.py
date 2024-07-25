@@ -6,18 +6,18 @@ cities: {str: {str: int}} = {}
 
 
 def main() -> None:
-    readCities()
+    read_cities()
 
     best_path: str
     best_dist: int
 
-    best_path, best_dist = getRoute(operator.lt)
+    best_path, best_dist = get_route(operator.lt)
     print(best_path + str(best_dist))
-    best_path, best_dist = getRoute(operator.gt)
+    best_path, best_dist = get_route(operator.gt)
     print(best_path + str(best_dist))
 
 
-def readCities() -> None:
+def read_cities() -> None:
     file: TextIO
     with open("input.txt", "r") as file:
         line: str
@@ -33,7 +33,7 @@ def readCities() -> None:
                 cities[str_split[0]][str_split[2]] = int(str_split[4])
 
 
-def getRoute(op: operator) -> tuple[str, int]:
+def get_route(op: operator) -> tuple[str, int]:
     best_route: str = ""
     city: str
     best_distance: int = sys.maxsize if op == operator.lt else 0
@@ -42,7 +42,7 @@ def getRoute(op: operator) -> tuple[str, int]:
         route: str
         distance: int
 
-        route, distance = calculateRoute(city, set(), "", op)
+        route, distance = calculate_route(city, set(), "", op)
         if op(distance, best_distance):
             best_route = route
             best_distance = distance
@@ -50,7 +50,7 @@ def getRoute(op: operator) -> tuple[str, int]:
     return best_route, best_distance
 
 
-def calculateRoute(name: str, visited: set[str], path: str, op: operator) -> tuple[str, int]:
+def calculate_route(name: str, visited: set[str], path: str, op: operator) -> tuple[str, int]:
     connected_city_name: str
     distance: int
     min_path: str = ""
@@ -66,7 +66,7 @@ def calculateRoute(name: str, visited: set[str], path: str, op: operator) -> tup
         path: str
         recursion_distance: int
 
-        path, recursion_distance = calculateRoute(connected_city_name, visited.copy(), path, op)
+        path, recursion_distance = calculate_route(connected_city_name, visited.copy(), path, op)
         if op(distance + recursion_distance, min_distance):
             min_distance = distance + recursion_distance
             min_path = path

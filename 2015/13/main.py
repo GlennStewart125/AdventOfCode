@@ -15,11 +15,11 @@ def main() -> None:
             people.add(line_split[0])
             pairs[line_split[0], line_split[-1].strip()[:-1]] = positive_or_negative * int(line_split[3])
             
-    max_happiness: int = decideSeating(people, pairs)
+    max_happiness: int = decide_seating(people, pairs)
     print(max_happiness)
 
     
-def decideSeating(people: set[str], pairs: {(str, str): int}) -> int:
+def decide_seating(people: set[str], pairs: {(str, str): int}) -> int:
     seating: tuple[str, str, str, str]
     max_happiness: int = 0
     

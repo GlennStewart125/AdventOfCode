@@ -20,15 +20,15 @@ def main() -> None:
             state.append(light_row)
 
     if with_corners:
-        setCorners(state)
+        set_corners(state)
     for step in range(steps):
-        state = performStep(state, with_corners)
+        state = perform_step(state, with_corners)
 
     on_count: int = sum([sum(row) for row in state])
     print(str(on_count))
 
 
-def performStep(state_current: [[bool]], with_corners: bool) -> [[bool]]:
+def perform_step(state_current: [[bool]], with_corners: bool) -> [[bool]]:
     state_new: [[bool]] = []
     y: int
     row: [bool]
@@ -38,22 +38,22 @@ def performStep(state_current: [[bool]], with_corners: bool) -> [[bool]]:
         x: int
         light: bool
         for x, light_bool in enumerate(row):
-            row_new.append(getNewLightValue(state_current, x, y, light_bool))
+            row_new.append(get_new_light_value(state_current, x, y, light_bool))
         state_new.append(row_new)
 
     if with_corners:
-        setCorners(state_new)
+        set_corners(state_new)
     return state_new
 
 
-def setCorners(state: [[bool]]) -> None:
+def set_corners(state: [[bool]]) -> None:
     state[0][0] = True
     state[0][-1] = True
     state[-1][0] = True
     state[-1][-1] = True
 
 
-def getNewLightValue(state: [[bool]], x: int, y: int, light_bool: bool) -> bool:
+def get_new_light_value(state: [[bool]], x: int, y: int, light_bool: bool) -> bool:
     surrounding_range: [int] = [-1, 0, 1]
     count: int = 0
     y_neighbour: int
